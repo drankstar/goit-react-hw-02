@@ -4,21 +4,20 @@ import Options from "./Components/Options/Options"
 import Description from "./Components/Description/Description"
 import Notification from "./Components/Notification/Notification"
 
-const initialState = { good: 0, neutral: 0, bad: 0 }
+const State = { good: 0, neutral: 0, bad: 0 }
 
 const InitialFeedback = () => {
-  const localStorageFeedback = window.localStorage.getItem("feedBack")
+  const localStorageFeedback = localStorage.getItem("feedBack")
   return localStorageFeedback !== null
     ? JSON.parse(localStorageFeedback)
-    : initialState
+    : State
 }
 
 function App() {
   const [feedBack, setfeedBack] = useState(InitialFeedback)
-  console.log(feedBack)
 
   useEffect(() => {
-    window.localStorage.setItem("feedBack", JSON.stringify(feedBack))
+    localStorage.setItem("feedBack", JSON.stringify(feedBack))
   }, [feedBack])
 
   const updateFeedback = (feedbackType) => {
@@ -34,7 +33,7 @@ function App() {
     Math.round(((feedBack.good + feedBack.neutral) / totalFeedback) * 100) + "%"
 
   const resetFeedback = () => {
-    setfeedBack(initialState)
+    setfeedBack(State)
   }
   return (
     <>
@@ -45,11 +44,15 @@ function App() {
         totalFeedback={totalFeedback}
       />
 
-      <Feedback
-        feedBack={feedBack}
-        totalFeedback={totalFeedback}
-        positiveFeedback={positiveFeedback}
-      />
+      {totalFeedback ? (
+        <Feedback
+          feedback={feedBack}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
+      ) : (
+        <Notification />
+      )}
     </>
   )
 }

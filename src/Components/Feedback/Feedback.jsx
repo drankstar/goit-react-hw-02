@@ -1,7 +1,6 @@
 import React from "react"
 
 const feedBack = ({ feedBack, totalFeedback, positiveFeedback }) => {
-  console.log()
   return (
     <ul>
       <li>Good:{feedBack.good}</li>
