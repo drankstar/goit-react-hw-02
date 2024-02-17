@@ -1,33 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react"
+import Feedback from "./Components/Feedback/Feedback"
+import Options from "./Components/Options/Options"
+import Description from "./Components/Description/Description"
+import Notification from "./Components/Notification/Notification"
+
+const initialState = { good: 0, neutral: 0, bad: 0 }
+
+const InitialFeedback = () => {
+  const localStorageFeedback = window.localStorage.getItem("feedBack")
+  return localStorageFeedback !== null
+    ? JSON.parse(localStorageFeedback)
+    : initialState
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [feedBack, setfeedBack] = useState(InitialFeedback)
+  console.log(feedBack)
 
+  useEffect(() => {
+    window.localStorage.setItem("feedBack", JSON.stringify(feedBack))
+  }, [feedBack])
+
+  const updateFeedback = (feedbackType) => {
+    setfeedBack((prevFeedback) => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1,
+    }))
+  }
+  const totalFeedback = feedBack.good + feedBack.neutral + feedBack.bad
+  console.log(totalFeedback)
+
+  const positiveFeedback =
+    Math.round(((feedBack.good + feedBack.neutral) / totalFeedback) * 100) + "%"
+
+  const resetFeedback = () => {
+    setfeedBack(initialState)
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Description />
+      <Options
+        updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
+        totalFeedback={totalFeedback}
+      />
+
+      <Feedback
+        feedBack={feedBack}
+        totalFeedback={totalFeedback}
+        positiveFeedback={positiveFeedback}
+      />
     </>
   )
 }
