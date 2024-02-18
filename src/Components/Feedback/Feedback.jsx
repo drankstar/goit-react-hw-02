@@ -1,13 +1,11 @@
-import React from "react"
-
-const feedBack = ({ feedBack, totalFeedback, positiveFeedback }) => {
+const feedBack = ({ feedBack, totalFeedback, goodFeedback }) => {
   return (
     <ul>
       <li>Good:{feedBack.good}</li>
       <li>Neutral:{feedBack.neutral}</li>
       <li>Bad:{feedBack.bad}</li>
       <li>Total:{totalFeedback}</li>
-      <li>Positive:{positiveFeedback}</li>
+      <li>Positive:{goodFeedback}</li>
     </ul>
   )
 }

@@ -4,36 +4,35 @@ import Options from "./Components/Options/Options"
 import Description from "./Components/Description/Description"
 import Notification from "./Components/Notification/Notification"
 
-const State = { good: 0, neutral: 0, bad: 0 }
+const stateType = { good: 0, neutral: 0, bad: 0 }
 
-const InitialFeedback = () => {
+const initialFeedback = () => {
   const localStorageFeedback = localStorage.getItem("feedBack")
   return localStorageFeedback !== null
     ? JSON.parse(localStorageFeedback)
-    : State
+    : stateType
 }
 
 function App() {
-  const [feedBack, setfeedBack] = useState(InitialFeedback)
+  const [feedBack, setfeedBack] = useState(initialFeedback)
 
   useEffect(() => {
     localStorage.setItem("feedBack", JSON.stringify(feedBack))
   }, [feedBack])
 
   const updateFeedback = (feedbackType) => {
-    setfeedBack((prevFeedback) => ({
-      ...prevFeedback,
-      [feedbackType]: prevFeedback[feedbackType] + 1,
+    setfeedBack((changeStatefeedBack) => ({
+      ...changeStatefeedBack,
+      [feedbackType]: changeStatefeedBack[feedbackType] + 1,
     }))
   }
   const totalFeedback = feedBack.good + feedBack.neutral + feedBack.bad
-  console.log(totalFeedback)
 
-  const positiveFeedback =
+  const goodFeedback =
     Math.round(((feedBack.good + feedBack.neutral) / totalFeedback) * 100) + "%"
 
   const resetFeedback = () => {
-    setfeedBack(State)
+    setfeedBack(stateType)
   }
   return (
     <>
@@ -46,9 +45,9 @@ function App() {
 
       {totalFeedback ? (
         <Feedback
-          feedback={feedBack}
+          feedBack={feedBack}
           totalFeedback={totalFeedback}
-          positiveFeedback={positiveFeedback}
+          goodFeedback={goodFeedback}
         />
       ) : (
         <Notification />
