@@ -3,6 +3,7 @@ import Feedback from "./Components/Feedback/Feedback"
 import Options from "./Components/Options/Options"
 import Description from "./Components/Description/Description"
 import Notification from "./Components/Notification/Notification"
+import styles from "./App.module.css"
 
 const stateType = { good: 0, neutral: 0, bad: 0 }
 
@@ -35,12 +36,13 @@ function App() {
     setfeedBack(stateType)
   }
   return (
-    <>
+    <div className={styles.container}>
       <Description />
       <Options
         updateFeedback={updateFeedback}
         resetFeedback={resetFeedback}
         totalFeedback={totalFeedback}
+        options={Object.keys(feedBack)}
       />
 
       {totalFeedback ? (
@@ -52,7 +54,7 @@ function App() {
       ) : (
         <Notification />
       )}
-    </>
+    </div>
   )
 }
 

@@ -1,10 +1,23 @@
-const Options = ({ updateFeedback, resetFeedback, totalFeedback }) => {
+import styles from "./Options.module.css"
+const Options = ({ updateFeedback, resetFeedback, totalFeedback, options }) => {
   return (
     <div>
-      <button onClick={() => updateFeedback("good")}>Good</button>
-      <button onClick={() => updateFeedback("neutral")}>Neutral</button>
-      <button onClick={() => updateFeedback("bad")}>Bad</button>
-      {totalFeedback !== 0 && <button onClick={resetFeedback}>Reset</button>}
+      <div className={styles.btncontainer}>
+        {options.map((option) => (
+          <button
+            className={styles.btn}
+            key={option}
+            onClick={() => updateFeedback(option)}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+      {totalFeedback !== 0 && (
+        <button className={styles.resetBtn} onClick={resetFeedback}>
+          Reset
+        </button>
+      )}
     </div>
   )
 }

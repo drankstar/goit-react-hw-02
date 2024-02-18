@@ -1,11 +1,22 @@
+import styles from "./Feedback.module.css"
 const feedBack = ({ feedBack, totalFeedback, goodFeedback }) => {
   return (
-    <ul>
-      <li>Good:{feedBack.good}</li>
-      <li>Neutral:{feedBack.neutral}</li>
-      <li>Bad:{feedBack.bad}</li>
-      <li>Total:{totalFeedback}</li>
-      <li>Positive:{goodFeedback}</li>
+    <ul className={styles.feedBackStyles}>
+      <li>
+        Good: <b>{feedBack.good}</b>
+      </li>
+      <li>
+        Neutral: <b>{feedBack.neutral}</b>
+      </li>
+      <li>
+        Bad: <b>{feedBack.bad}</b>
+      </li>
+      <li>
+        Total: <b>{totalFeedback}</b>
+      </li>
+      <li>
+        Positive: <b>{goodFeedback}</b>
+      </li>
     </ul>
   )
 }

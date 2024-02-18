@@ -1,0 +1,29 @@
+.btncontainer{
+    margin-bottom: 10px;
+    display: flex;
+    gap: 24px;
+}
+.btn{
+    font-size: 18px;
+    border-radius: 15px;
+    padding: 10px;
+    text-transform: uppercase;
+    width: 326px;
+    border: 3px solid black;
+
+}
+.btn:hover{
+    background-color: rgb(204, 175, 231);
+}
+.resetBtn{
+    background-color: rgb(237, 55, 67);
+    font-size: 18px;
+    border-radius: 21px;
+    padding: 10px;
+    text-transform: uppercase;
+    width: 222px;
+    border: 3px solid black;
+}
+.resetBtn:hover{
+    background-color: #ee2532;
+}
