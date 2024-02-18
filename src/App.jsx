@@ -5,13 +5,13 @@ import Description from "./Components/Description/Description"
 import Notification from "./Components/Notification/Notification"
 import styles from "./App.module.css"
 
-const stateType = { good: 0, neutral: 0, bad: 0 }
+const initialFeedbackState = { good: 0, neutral: 0, bad: 0 }
 
 const initialFeedback = () => {
   const localStorageFeedback = localStorage.getItem("feedBack")
   return localStorageFeedback !== null
     ? JSON.parse(localStorageFeedback)
-    : stateType
+    : initialFeedbackState
 }
 
 function App() {
@@ -29,11 +29,12 @@ function App() {
   }
   const totalFeedback = feedBack.good + feedBack.neutral + feedBack.bad
 
-  const goodFeedback =
-    Math.round(((feedBack.good + feedBack.neutral) / totalFeedback) * 100) + "%"
+  const goodFeedback = Math.round(
+    ((feedBack.good + feedBack.neutral) / totalFeedback) * 100
+  )
 
   const resetFeedback = () => {
-    setfeedBack(stateType)
+    setfeedBack(initialFeedbackState)
   }
   return (
     <div className={styles.container}>

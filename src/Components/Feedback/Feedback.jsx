@@ -1,5 +1,5 @@
 import styles from "./Feedback.module.css"
-const feedBack = ({ feedBack, totalFeedback, goodFeedback }) => {
+const Feedback = ({ feedBack, totalFeedback, goodFeedback }) => {
   return (
     <ul className={styles.feedBackStyles}>
       <li>
@@ -15,10 +15,10 @@ const feedBack = ({ feedBack, totalFeedback, goodFeedback }) => {
         Total: <b>{totalFeedback}</b>
       </li>
       <li>
-        Positive: <b>{goodFeedback}</b>
+        Positive: <b>{goodFeedback}&#37;</b>
       </li>
     </ul>
   )
 }
 
-export default feedBack
+export default Feedback

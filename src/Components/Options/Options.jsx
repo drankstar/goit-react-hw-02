@@ -8,6 +8,7 @@ const Options = ({ updateFeedback, resetFeedback, totalFeedback, options }) => {
             className={styles.btn}
             key={option}
             onClick={() => updateFeedback(option)}
+            aria-label={option}
           >
             {option}
           </button>
